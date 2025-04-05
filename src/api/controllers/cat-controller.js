@@ -40,7 +40,7 @@ const putCat = (req, res) => {
 }
 
 const deleteCat = (req, res) => {
-    const catId = req.params.id;
+    const catId = parseInt(req.params.id);
 
     const result = removeCat(catId);
    
