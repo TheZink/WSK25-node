@@ -8,7 +8,7 @@ const userItems = [
       password: 'password',
     },
     {
-      user_id: 3610,
+      user_id: 3608,
       name: 'Lauri',
       username: 'lauriv',
       email: 'lauri@metropolia.fi',
@@ -40,7 +40,7 @@ const userItems = [
   };
 
   const updateUser = (id, updatedData) => {
-    const index = userItems.find(item => item.user_id === id);
+    const index = userItems.findIndex(item => item.user_id === id);
 
     if (index !== -1) {
       userItems[index] = {
@@ -54,7 +54,7 @@ const userItems = [
   };
 
   const removeUser = (id) => {
-    const index = userItems.find(item => item.user_id === id);
+    const index = userItems.findIndex(item => item.user_id === id);
 
     if (index !== -1) {
       userItems.splice(index, 1);
