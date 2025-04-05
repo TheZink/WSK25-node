@@ -40,8 +40,29 @@ const addCat = (cat) => {
     return {cat_id: newId};
 };
 
-const putCat = (id) => {
-    
+const updateCat = (id, updatedData) => {
+    const index = catItems.findIndex(item => item.cat_id === id);
+
+    if (index !== -1) {
+        catItems[index] = {
+            ...catItems[index],
+            ...updatedData
+        }
+        return {message: `Cat ${id} updated`};
+    } else {
+        return {message: `Cat with id ${id} dont exist`}
+    }
 }
 
-export {listAllCats, findCatById, addCat};
+const removeCat = (id) => {
+   const index = catItems.findIndex(item => item.cat_id === id);
+
+   if (index !== -1) {
+     catItems.splice(index, 1);
+     return {message: `Cat ${id} removed`}
+   } else {
+    return {message: `Cat with id ${id} dont exist`}
+   }
+}
+
+export {listAllCats, findCatById, addCat, updateCat, removeCat};
