@@ -8,7 +8,7 @@ const catItems = [
         birthdate: '2013-07-01',
     }, 
     {
-        cat_id: 124,
+        cat_id: 122,
         cat_name: 'Kerttu',
         weight: 8,
         owner: 3601,
