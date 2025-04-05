@@ -38,5 +38,31 @@ const userItems = [
     });
     return {user_id: newId};
   };
+
+  const updateUser = (id, updatedData) => {
+    const index = userItems.find(item => item.user_id === id);
+
+    if (index !== -1) {
+      userItems[index] = {
+        ...userItems[index],
+        ...updatedData
+      }
+      return {message: `User ${id} udpated`};
+    } else {
+      return {message: `User with id ${id} dont exist`};
+    }
+  };
+
+  const removeUser = (id) => {
+    const index = userItems.find(item => item.user_id === id);
+
+    if (index !== -1) {
+      userItems.splice(index, 1);
+      return {message: `User ${id} removed`};
+    } else {
+      return {message: `User with id ${id} dont exist`};
+    }
+
+  }
   
-  export {listAllUsers, findUserById, addUser};
+  export {listAllUsers, findUserById, addUser, updateUser, removeUser};
