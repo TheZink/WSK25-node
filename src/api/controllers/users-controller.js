@@ -5,7 +5,8 @@ const getUser = (req, res) => {
 };
 
 const getUserById = (req, res) => {
-  const user = findUserById(req.params.id);
+  const userId = parseInt(req.params.id, 10);
+  const user = findUserById(userId);
   if (user) {
     res.json(user);
   } else {
@@ -23,7 +24,7 @@ const postUser = (req, res) => {
   }
 };
 const putUser = (req, res) => {
-    const userId = req.params.id;
+    const userId = parseInt(req.params.id);
     const updatedUser = req.body;
 
     const result = updateUser(userId, updatedUser);
@@ -37,7 +38,7 @@ const putUser = (req, res) => {
 };
 
 const deleteUser = (req, res) => {
-    const userId = req.params.id;
+    const userId = parseInt(req.params.id);
 
     const result = removeUser(userId);
 
