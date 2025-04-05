@@ -5,7 +5,8 @@ const getCat = (req, res) => {
 }
 
 const getCatById = (req, res) => {
-    const cat = findCatById(req.params.id);
+    const catId = parseInt(req.params.id);
+    const cat = findCatById(catId);
     if (cat) {
         res.json(cat);
     } else {
@@ -24,7 +25,7 @@ const postCat = (req, res) => {
 }
 
 const putCat = (req, res) => {
-    const catId = req.params.id;
+    const catId = parseInt(req.params.id);
     const updatedCat = req.body;
 
     const result = updateCat(catId, updatedCat);
