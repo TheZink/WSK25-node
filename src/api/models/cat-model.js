@@ -29,7 +29,7 @@ const addCat = async (cat) => {
     return {cat_id: rows[0].insertId};
 };
 
-const modifyCat = async (cat, id) => {
+const updateCat = async (cat, id) => {
   const sql = promisePool.format(`UPDATE wsk_cats SET ? WHERE cat_id = ?`, [cat, id]);
     const rows = await promisePool.execute(sql);
     console.log('rows', rows);
@@ -49,7 +49,6 @@ const removeCat = async (id) => {
 };
 const getOwnerName = async (id) => {
   try {
-  
     const [rows] = await promisePool.execute('SELECT name FROM wsk_users WHERE user_id = ?', [id]);
     
     if (rows.length === 0) {
@@ -78,6 +77,6 @@ const findCatByOwnerId = async (id) => {
 };
 
 export { listAllCats, findCatById,
-    addCat, modifyCat, getOwnerName,
+    addCat, updateCat, getOwnerName,
     removeCat, findCatByOwnerId,
   };
