@@ -1,10 +1,11 @@
+import {getMe, authUser} from '../controllers/auth-controller.js';
+import {authenticateToken} from '../middlewares/authentication.js';
 import express from 'express';
-import {getUser, getUserById, postUser, putUser, deleteUser,
-} from '../controllers/user-controller.js';
 
-const userRouter = express.Router();
+const authRouter = express.Router();
 
-userRouter.route('/').get(getUser).post(postUser);
-userRouter.route('/:id').get(getUserById).put(putUser).delete(deleteUser);
+authRouter.route('/login').post(authUser);
 
-export default userRouter;
+authRouter.route('/me').get(authenticateToken, getMe);
+
+export default authRouter;
