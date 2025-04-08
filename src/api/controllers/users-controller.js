@@ -1,12 +1,13 @@
 import {listAllUsers, findUserById, addUser, updateUser, removeUser} from '../models/user-model.js';
+import bcrypt from 'bcrypt';
 
 const getUser = (req, res) => {
   res.json(listAllUsers());
 };
 
-const getUserById = (req, res) => {
+const getUserById = async (req, res) => {
   const userId = parseInt(req.params.id, 10);
-  const user = findUserById(userId);
+  const user = await findUserById(userId);
   if (user) {
     res.json(user);
   } else {
@@ -14,8 +15,9 @@ const getUserById = (req, res) => {
   }
 };
 
-const postUser = (req, res) => {
-  const result = addUser(req.body);
+const postUser = async (req, res) => {
+  req.body.password = bcrypt.hashSync(req.body.password, 10)
+  const result = await addUser(req.body);
   if (result.user_id) {
     res.status(201);
     res.json({message: 'New user added.', result});
@@ -23,8 +25,8 @@ const postUser = (req, res) => {
     res.sendStatus(400);
   }
 };
-const putUser = (req, res) => {
-    const userId = parseInt(req.params.id);
+const putUser = async (req, res) => {
+    const userId = await parseInt(req.params.id);
     const updatedUser = req.body;
 
     const result = updateUser(userId, updatedUser);
@@ -37,10 +39,10 @@ const putUser = (req, res) => {
     }
 };
 
-const deleteUser = (req, res) => {
+const deleteUser = async (req, res) => {
     const userId = parseInt(req.params.id);
 
-    const result = removeUser(userId);
+    const result = await removeUser(userId);
 
     if(result){
         res.sendStatus(200);
